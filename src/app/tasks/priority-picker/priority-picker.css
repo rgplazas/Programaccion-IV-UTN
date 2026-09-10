@@ -1,0 +1,17 @@
+.picker {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    padding: 6px 14px;
+    border: 1px solid #345A4D;
+    background: transparent;
+    cursor: pointer;
+}
+
+button.selected {
+    background: #125E42;
+    color: #fff;
+    border-color: #125E42;
+}

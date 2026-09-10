@@ -1,1 +1,58 @@
-<p>task-form works!</p>
+<h2>{{ taskId() ? 'Editar tarea' : 'Nueva tarea' }}</h2>
+
+<form [formRoot]="taskForm" (submit)="$event.preventDefault()">
+
+  <label for="title">Título</label>
+
+  <input
+    id="title"
+    [formField]="taskForm.title"
+  />
+
+  @let f = taskForm.title();
+
+  @if (f.touched() && !f.valid()) {
+    @for (e of f.errors(); track e.kind) {
+      <p class="error">{{ e.message }}</p>
+    }
+  }
+
+  <label for="status">Estado</label>
+
+  <select
+    id="status"
+    [formField]="taskForm.status">
+
+    <option value="pending">Pendiente</option>
+    <option value="in-progress">En curso</option>
+    <option value="done">Hecha</option>
+
+  </select>
+
+  <label>Prioridad</label>
+
+  <app-priority-picker
+    [(value)]="draft().priority">
+  </app-priority-picker>
+
+  @let fp = taskForm.priority();
+
+  @if (fp.touched() && !fp.valid()) {
+    @for (e of fp.errors(); track e.kind) {
+      <p class="error">{{ e.message }}</p>
+    }
+  }
+
+  <div class="actions">
+
+    <button type="submit">
+      Guardar tarea
+    </button>
+
+    <a routerLink="/tasks">
+      Cancelar
+    </a>
+
+  </div>
+
+</form>

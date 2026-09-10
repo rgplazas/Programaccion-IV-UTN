@@ -7,18 +7,6 @@ placeholder="Buscar tarea..."
 
 
 @for (t of tasks(); track t.id){
-    <!--<div class="row"
-    [class.done]="task.status === 'done'"
-    [class.active]= "task.status === 'in-progress'"
-    (click)="toggle(task)"
-    (keydown.enter)="toggle(task)"
-    tabindex="0">
-
-    <span class="title">{{task.title}} </span>
-    <span class="badge">{{label(task.status)}} </span>
-    <span class="prority">P{{task.priority}} </span>
-
-    </div>-->
     <a [routerLink]="['/tasks',t.id]">
     <app-task-card
         [task]="t"

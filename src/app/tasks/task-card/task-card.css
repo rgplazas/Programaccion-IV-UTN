@@ -1,0 +1,100 @@
+:host {
+    display: block;
+    max-width: 560px;
+    font-family: system-ui, sans-serif;
+}
+
+.card {
+    padding: 16px;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #fff;
+    box-sizing: border-box;
+    transition: 0.2s ease;
+}
+
+.card:hover {
+    border-color: #36AA7E;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    color: #125E42;
+    font-size: 18px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 14px;
+}
+
+/* Estado */
+.badge {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: #eef3f0;
+    color: #125E42;
+}
+
+/* Prioridad */
+.priority {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: #f3f3f3;
+    color: #7A8B84;
+}
+
+/* Días */
+.days {
+    font-size: 12px;
+    color: #7A8B84;
+}
+
+/* Botones */
+.card button {
+    padding: 7px 12px;
+    margin-right: 8px;
+    border: 1px solid #36AA7E;
+    border-radius: 6px;
+    background: #eef3f0;
+    color: #125E42;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.card button:hover {
+    background: #36AA7E;
+    color: white;
+}
+
+/* Eliminar */
+.card button:last-child {
+    border-color: #d9534f;
+    background: #fff5f5;
+    color: #b52b27;
+}
+
+.card button:last-child:hover {
+    background: #d9534f;
+    color: white;
+}
+
+/* Modo compacto */
+.card.compact {
+    padding: 10px 12px;
+}
+
+.card.compact h3 {
+    font-size: 16px;
+}
+
+.card.compact .info {
+    margin-bottom: 8px;
+}

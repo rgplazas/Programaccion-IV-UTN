@@ -1,1 +1,14 @@
-<p>priority-picker works!</p>
+<div class="priority-picker">
+
+  @for (p of priorities; track p) {
+    <button
+      type="button"
+      (click)="set(p)"
+      [class.selected]="value() === p">
+
+      P{{ p }}
+
+    </button>
+  }
+
+</div>

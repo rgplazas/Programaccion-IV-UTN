@@ -1,1 +1,18 @@
-<p>task-board works!</p>
+<h2>Tablero</h2> 
+<div class="board"> 
+  @for (col of columns; track col.status) { 
+    <section class="column"> 
+      <h3>{{ col.label }}</h3> 
+      @for (t of byStatus(col.status)(); track t.id) { 
+        <app-task-card 
+          [task]="t" 
+          [compact]="true" 
+          [days]="2" 
+          (done)="markDone($event)" 
+          (deleted)="remove($event)" /> 
+      } @empty { 
+        <p class="empty">Nada por aquí</p> 
+      } 
+    </section> 
+  } 
+</div> 
