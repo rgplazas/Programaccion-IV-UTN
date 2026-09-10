@@ -1,0 +1,9 @@
+@if(task(); as t){
+    <H2>{{t.title}}</H2>
+    <p>Estado:{{t.status}}
+       Prioridad:P{{t.priority}}
+    </p>
+    <a [routerLink]="['/tasks',t.id,'edit']">Editar</a>
+}@else{
+    <p>Tarea no encontrada</p>
+}
