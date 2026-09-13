@@ -1,5 +1,34 @@
-form { display: flex; flex-direction: column; gap: 12px; max-width: 420px; } 
-input, select { padding: 8px; border: 1px solid #345A4D; border-radius: 4px; } 
-.error { color: #C05172; margin: 2px 0 0; font-size: 0.9em; } 
-.actions { display: flex; gap: 12px; margin-top: 8px; } 
-button[type="submit"] { background: #125E42; color: #fff; border: none; padding: 8px 18px; border-radius: 4px; cursor: pointer; } 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 420px;
+}
+
+input,
+select {
+    padding: 8px;
+    border: 1px solid #345A4D;
+    border-radius: 4px;
+}
+
+.error {
+    color: #C05172;
+    margin: 2px 0 0;
+    font-size: 0.9em;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+button[type="submit"] {
+    background: #125E42;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}

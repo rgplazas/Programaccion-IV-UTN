@@ -1,5 +1,6 @@
 import { Component, computed, inject, input, numberAttribute } from '@angular/core';
 import { TaskStore } from '../../task.store';
+import { statusLabel } from '../task-status';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -14,6 +15,8 @@ export class TaskDetail {
   private readonly store = inject(TaskStore);
 
   task = computed( () => this.store.tasks().find(t => t.id === this.taskId()));
+
+  label = statusLabel;
 
 
 }

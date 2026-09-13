@@ -1,0 +1,49 @@
+:host {
+    display: block;
+    min-height: 100vh;
+
+    font-family: system-ui, sans-serif;
+    background: #f5f7f6;
+    color: #26332e;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+    padding: 14px 24px;
+
+    background: #fff;
+    border-bottom: 1px solid #e2e8e5;
+
+    position: sticky;
+    top: 0;
+}
+
+nav a {
+    padding: 9px 16px;
+    border-radius: 7px;
+
+    text-decoration: none;
+    color: #5f7069;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background: #eef3f0;
+    color: #125e42;
+}
+
+nav a.active {
+    background: #36aa7e;
+    color: #fff;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+}

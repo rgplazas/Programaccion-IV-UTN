@@ -1,14 +1,9 @@
-<div class="priority-picker">
-
-  @for (p of priorities; track p) {
+<div class="picker">
+  @for (p of [1, 2, 3]; track p) {
     <button
       type="button"
       (click)="set(p)"
-      [class.selected]="value() === p">
-
-      P{{ p }}
-
-    </button>
+      [class.selected]="value() === p">P{{ p }}</button>
   }
 
 </div>

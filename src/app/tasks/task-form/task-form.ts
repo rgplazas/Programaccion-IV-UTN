@@ -1,7 +1,6 @@
 import { Component, effect, inject, input, numberAttribute, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { form, required, minLength, maxLength, min, max, FormField, FormRoot } from '@angular/forms/signals';
-import { TaskStatus } from '../task-status';
 import { PriorityPicker } from '../priority-picker/priority-picker';
 import { TaskStore } from '../../task.store';
 import { TaskDraft } from '../task.model';
@@ -17,7 +16,7 @@ export class TaskForm {
   private readonly router = inject(Router);
 
   // presente solo en la ruta /tasks/:taskId/edit 
-  taskId = input<number, unknown>(undefined!, { transform: numberAttribute });
+  taskId = input<number, undefined>(undefined, { transform: numberAttribute });
 
   // paso 1 · el borrador como signal del dominio 
   protected draft = signal<TaskDraft>({
@@ -44,15 +43,19 @@ export class TaskForm {
           this.store.add(this.draft());
         }
         await this.router.navigate(['/tasks']);
-      }   // marca todos los campos como touched 
+      }   
     }
   });
 
   constructor() {
     // edición: precargar el borrador con la tarea de la ruta 
     effect(() => {
-      const t = this.store.find(this.taskId());
-      if (t) this.draft.set({ title: t.title, status: t.status, priority: t.priority });
+      const id = this.taskId();
+      if (!id) return 
+      const t = this.store.find(id);
+      if(t){
+        this.draft.set({title: t.title, status: t.status, priority: t.priority});
+      }
     });
   }
 } 

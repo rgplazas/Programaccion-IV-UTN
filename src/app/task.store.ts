@@ -1,5 +1,5 @@
 import { Injectable, signal } from "@angular/core";
-import { TaskModel } from "./tasks/task.model";
+import { TaskModel, TaskDraft } from "./tasks/task.model";
 
 @Injectable({providedIn:'root'})
 export class TaskStore{
@@ -17,7 +17,7 @@ readonly tasks = signal<TaskModel[]>(
     return this.tasks().find(t => t.id === id);
   }
 
-  add(draft:Omit<TaskModel,'id'>):TaskModel{
+  add(draft: TaskDraft):TaskModel{
     const id = Math.max(0, ...this.tasks().map(t => t.id)) + 1;
     const task:TaskModel = {id,...draft};
     this.tasks.update(list => [...list, task]);

@@ -1,6 +1,5 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { TaskModel } from '../task.model';
-import { statusLabel, nextStatus } from '../task-status';
 import { RouterLink } from '@angular/router';
 import { TaskCard } from '../task-card/task-card';
 import { TaskStore } from '../../task.store';

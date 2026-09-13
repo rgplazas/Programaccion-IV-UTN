@@ -1,9 +1,25 @@
-@if(task(); as t){
-    <H2>{{t.title}}</H2>
-    <p>Estado:{{t.status}}
-       Prioridad:P{{t.priority}}
-    </p>
-    <a [routerLink]="['/tasks',t.id,'edit']">Editar</a>
-}@else{
-    <p>Tarea no encontrada</p>
+@if (task(); as t) {
+
+  <h2>{{ t.title }}</h2>
+
+  <div class="info">
+    <span class="badge">
+      Estado: {{ label(t.status) }}
+    </span>
+
+    <span class="priority">
+      Prioridad: P{{ t.priority }}
+    </span>
+  </div>
+
+  <a [routerLink]="['/tasks', t.id, 'edit']">
+    Editar tarea
+  </a>
+
+} @else {
+
+  <p class="not-found">
+    Tarea no encontrada
+  </p>
+
 }

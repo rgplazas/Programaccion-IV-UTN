@@ -1,4 +1,5 @@
 import { Component, input, output, numberAttribute } from '@angular/core';
+import { statusLabel } from '../task-status';
 import { TaskModel } from '../task.model';
 
 @Component({
@@ -13,13 +14,15 @@ export class TaskCard {
 
   compact = input(false);
 
-  days = input.required<unknown, number>({transform:numberAttribute});
+  days = input(0, {transform:numberAttribute});
 
-  size = input('md', {alias:'cardSize'});
+  size = input<'sm' | 'md' | 'lg'>('md', { alias: 'cardSize' }); 
 
   done = output<TaskModel>();
 
   deleted = output<number>();
+
+  label = statusLabel;
 
   onDone(){this.done.emit(this.task());}
   

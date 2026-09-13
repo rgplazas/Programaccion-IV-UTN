@@ -1,3 +1,17 @@
-.board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; } 
-.column { border: 1px solid #345A4D; border-radius: 6px; padding: 12px; min-height: 200px; } 
-.empty { color: #7A8B84; font-style: italic; } 
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.column {
+    border: 1px solid #345A4D;
+    border-radius: 6px;
+    padding: 12px;
+    min-height: 200px;
+}
+
+.empty {
+    color: #7A8B84;
+    font-style: italic;
+}

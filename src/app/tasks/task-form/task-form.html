@@ -31,9 +31,8 @@
 
   <label>Prioridad</label>
 
-  <app-priority-picker
-    [(value)]="draft().priority">
-  </app-priority-picker>
+  
+  <app-priority-picker [formField]="taskForm.priority" />
 
   @let fp = taskForm.priority();
 
