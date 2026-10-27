@@ -30,7 +30,7 @@ export class TaskStore {
 
   private readonly currentUserId =
     signal<string | null | undefined>(null);
-  private realtimeChannel: RealtimeChannel | null = null;
+  //private realtimeChannel: RealtimeChannel | null = null;
   private activeUserId: string | undefined;
 
   setUser(uid: string | undefined): void {
@@ -50,15 +50,15 @@ export class TaskStore {
       if (uid === undefined) {
         this.tasks.set([]);
         this.loading.set(false);
-        this.stopRealtime();
+        //this.stopRealtime();
         this.activeUserId = undefined;
         return;
       }
 
       if (this.activeUserId !== uid) {
-        this.stopRealtime();
+        //this.stopRealtime();
         this.activeUserId = uid;
-        this.subscribeRealtime();
+        //this.subscribeRealtime();
         void this.load();
       }
     });
@@ -85,17 +85,12 @@ export class TaskStore {
       .find(t => t.id === id);
   }
 
-  async add(
+  /*async add(
     draft: TaskDraft
   ): Promise<TaskModel> {
 
     const created = await this.api.add(draft);
-
-    this.tasks.update(list => [
-      ...list,
-      created
-    ]);
-
+    this.tasks.update(list => [...list,created]);
     return created;
   }
 
@@ -193,5 +188,5 @@ export class TaskStore {
         break;
       }
     }
-  }
+  }*/
 }

@@ -11,10 +11,11 @@ placeholder="Buscar tarea..."
     <app-task-card
         [task]="t"
         [days]="3"
-        cardSize="lg"
-        (done)="markDone($event)"
-        (deleted)="remove($event)"/>
+        cardSize="lg"/>
     </a>
 }@empty{
     <p class="empty">Sin tareas todavía</p>
 }
+
+<!-- (done)="markDone($event)"
+        (deleted)="remove($event)" -->

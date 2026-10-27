@@ -1,8 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
 import { TaskCard } from '../task-card/task-card';
-import { TaskStore } from '../../services/task-store.service';
 import { TaskModel } from '../task.model';
 import { TaskStatus, COLUMN_LABELS } from '../task-status';
+import { TaskStore } from '../../services/task-store.service';
 
 @Component({
   selector: 'app-task-board',
@@ -32,11 +32,11 @@ export class TaskBoard {
     return groups;
   });
 
-  markDone(task: TaskModel) {
+  /*markDone(task: TaskModel) {
     this.store.update(task.id, {status:'done'});
   }
 
   remove(id: number) {
     this.store.remove(id);
-  }
+  }*/
 } 

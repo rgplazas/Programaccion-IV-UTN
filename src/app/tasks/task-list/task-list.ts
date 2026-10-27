@@ -3,6 +3,8 @@ import { TaskModel } from '../task.model';
 import { RouterLink } from '@angular/router';
 import { TaskCard } from '../task-card/task-card';
 import { TaskStore } from '../../services/task-store.service';
+//import { TaskApi } from '../task-api.service';
+
 @Component({
   imports: [RouterLink, TaskCard],
   selector: 'app-task-list',
@@ -20,11 +22,11 @@ export class TaskList {
     return this.store.tasks().filter(t => t.title.toLowerCase().includes(q))
   })
 
-  markDone(task: TaskModel) {
+  /*markDone(task: TaskModel) {
     this.store.update(task.id, {status:'done'});
   }
 
   remove(id: number) {
     this.store.remove(id);
-  }
+  }*/
 }

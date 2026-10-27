@@ -1,46 +1,37 @@
 import { Injectable } from '@angular/core';
-import { supabase } from '../services/supabase.client';
 import { TaskModel, TaskDraft } from './task.model';
+import { environments } from '../../environments/environments';
 
 // Servicio delgado: SOLO habla con la API. No guarda estado,
 @Injectable({ providedIn: 'root' })
 export class TaskApi {
-
+    private readonly API = environments.production ? 'https://taskflow-api-4pjt.onrender.com/':'http://localhost:3000';
+    private toModel = (d:any):TaskModel => ({...d, id: d._id,updated_at: d.updatedAt}); 
+    
     async loadAll(): Promise<TaskModel[]> {
-        const { data, error } = await supabase
-            .from('tasks')
-            .select('*')
-            .order('id');
-        if (error) throw error;
-        return (data ?? []) as TaskModel[];
+        const r = await fetch(`${this.API}/tasks`)
+        return (await r.json()).map(this.toModel);
     }
 
-    async add(draft: TaskDraft): Promise<TaskModel> {
-        const { data: { user }, error: authError } = await supabase.auth.getUser();
-        if (authError) throw authError;
-        if (!user) throw new Error('La sesión expiró. Inicia sesión nuevamente para crear tareas.');
-        const { data, error } = await supabase
-            .from('tasks')
-            .insert({ ...draft, user_id: user.id })
-            .select()
-            .single();                 // devuelve la fila creada
-        if (error) throw error;
-        return data as TaskModel;
+    async add(draft: TaskDraft): Promise<void> {
+        await fetch(`${this.API}/tasks`),{
+            method:'POST',
+            headers:{'Content-Type':'aplication/json'},
+            body:JSON.stringify(draft)
+        }
     }
 
-    async update(id: number, patch: Partial<TaskModel>): Promise<void> {
-        const { error } = await supabase
-            .from('tasks')
-            .update(patch)
-            .eq('id', id);
-        if (error) throw error;
+    async update(id: string, patch: Partial<TaskModel>): Promise<void> {
+        await fetch(`${this.API}/tasks/${id}`),{
+            method:'PUT',
+            headers:{'Content-Type':'aplication/json'},
+            body:JSON.stringify(patch)
+        }
     }
 
-    async remove(id: number): Promise<void> {
-        const { error } = await supabase
-            .from('tasks')
-            .delete()
-            .eq('id', id);
-        if (error) throw error;
+    async remove(id: string): Promise<void> {
+        await fetch(`${this.API}/tasks/${id}`),{
+            method:'DELETE'
+        }
     }
 }

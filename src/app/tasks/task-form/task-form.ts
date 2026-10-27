@@ -2,9 +2,9 @@ import { Component, effect, inject, input, numberAttribute, signal } from '@angu
 import { Router, RouterLink } from '@angular/router';
 import { form, required, minLength, maxLength, min, max, FormField, FormRoot } from '@angular/forms/signals';
 import { PriorityPicker } from '../priority-picker/priority-picker';
-import { TaskStore } from '../../services/task-store.service';
 import { TaskDraft, createEmptyTaskDraft } from '../task.model';
 import { AttachmentsService } from '../../services/attachments';
+import { TaskStore } from '../../services/task-store.service';
 
 @Component({
   selector: 'app-task-form',
@@ -69,12 +69,12 @@ export class TaskForm {
 
           try {
             if (id !== null && id !== undefined) {
-              await this.store.update(id, this.draft());
-              savedId = id;
+              /* await this.store.update(id, this.draft());
+              savedId = id; */
             } else {
-              const created = await this.store.add(this.draft());
+             /*  const created = await this.store.add(this.draft());
               savedId = created.id;
-              this.createdTaskId.set(savedId);
+              this.createdTaskId.set(savedId); */
             }
           } catch (error) {
             this.submitError.set(`No se pudo guardar la tarea: ${this.errorMessage(error)}`);
@@ -84,7 +84,7 @@ export class TaskForm {
           const file = this.attachment();
           if (file) {
             try {
-              await this.attachments.upload(savedId, file);
+              /* await this.attachments.upload(savedId, file); */
             } catch (error) {
               this.submitError.set(`La tarea se guardó, pero no se pudo subir el adjunto: ${this.errorMessage(error)}`);
               return;
