@@ -7,16 +7,15 @@ import { environments } from '../../environments/environments';
 export class TaskApi {
     private readonly API = environments.apiUrl.replace(/\/+$/, '');
 
-    private toModel = (d: any): TaskModel => ({
-        ...d,
-        id: d._id,
-        updated_at: d.updatedAt
+    private toModel = (document: any): TaskModel => ({
+        id: document._id ?? document.id,
+        title: document.title,
+        status: document.status,
+        priority: Number(document.priority) as 1 | 2 | 3,
+        updated_at: document.updatedAt,
     });
 
-    private async request(
-        path: string,
-        options?: RequestInit
-    ): Promise<Response> {
+    private async request(path: string, options?: RequestInit): Promise<Response> {
         const response = await fetch(`${this.API}${path}`, options);
 
         if (!response.ok) {
@@ -32,29 +31,29 @@ export class TaskApi {
         return (await response.json()).map(this.toModel);
     }
 
-    async add(draft: TaskDraft): Promise<void> {
-        await this.request('/tasks', {
+    async add(draft: TaskDraft): Promise<TaskModel> {
+        const response = await this.request('/tasks', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(draft)
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(draft),
         });
+
+        return this.toModel(await response.json());
     }
 
-    async update(id: string, patch: Partial<TaskModel>): Promise<void> {
-        await this.request(`/tasks/${id}`, {
+    async update(id: string, patch: Partial<TaskModel>): Promise<TaskModel> {
+        const response = await this.request(`/tasks/${id}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(patch)
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(patch),
         });
+
+        return this.toModel(await response.json());
     }
 
     async remove(id: string): Promise<void> {
         await this.request(`/tasks/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
         });
     }
 }

@@ -32,11 +32,11 @@ export class TaskBoard {
     return groups;
   });
 
-  /*markDone(task: TaskModel) {
-    this.store.update(task.id, {status:'done'});
+  markDone(task: TaskModel): void {
+    void this.store.update(task.id, { status: 'done' });
   }
 
-  remove(id: number) {
-    this.store.remove(id);
-  }*/
-} 
+  remove(id: string): void {
+    void this.store.remove(id);
+  }
+}

@@ -9,22 +9,21 @@ import { TaskModel } from '../task.model';
   templateUrl: './task-card.html',
 })
 export class TaskCard {
-
   task = input.required<TaskModel>();
-
   compact = input(false);
-
-  days = input(0, {transform:numberAttribute});
-
-  size = input<'sm' | 'md' | 'lg'>('md', { alias: 'cardSize' }); 
+  days = input(0, { transform: numberAttribute });
+  size = input<'sm' | 'md' | 'lg'>('md', { alias: 'cardSize' });
 
   done = output<TaskModel>();
-
-  deleted = output<number>();
+  deleted = output<string>();
 
   label = statusLabel;
 
-  onDone(){this.done.emit(this.task());}
-  
-  onDelete(){this.deleted.emit(this.task().id);}
+  onDone(): void {
+    this.done.emit(this.task());
+  }
+
+  onDelete(): void {
+    this.deleted.emit(this.task().id);
+  }
 }

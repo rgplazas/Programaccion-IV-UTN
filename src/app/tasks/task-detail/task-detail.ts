@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, numberAttribute, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { TaskStore } from '../../services/task-store.service';
 import { statusLabel } from '../task-status';
 import { RouterLink } from '@angular/router';
@@ -13,11 +13,13 @@ import { AttachmentsService } from '../../services/attachments';
 export class TaskDetail {
   private readonly store = inject(TaskStore);
   private readonly attachmentsService = inject(AttachmentsService);
+
   readonly attachments = signal<{ name: string; url: string }[]>([]);
   readonly attachmentError = signal(false);
-  
-  taskId = input.required({transform:numberAttribute});
-  task = computed( () => this.store.tasks().find(t => t.id === this.taskId()));
+
+  // withComponentInputBinding() recibe el parámetro de ruta como string.
+  taskId = input.required<string>();
+  task = computed(() => this.store.find(this.taskId()));
 
   constructor() {
     effect(() => {
@@ -28,15 +30,13 @@ export class TaskDetail {
     });
   }
 
-  private async loadAttachments(taskId: number): Promise<void> {
+  private async loadAttachments(taskId: string): Promise<void> {
     try {
       this.attachments.set(await this.attachmentsService.list(taskId));
     } catch {
       this.attachmentError.set(true);
     }
   }
-  
+
   label = statusLabel;
-
-
 }

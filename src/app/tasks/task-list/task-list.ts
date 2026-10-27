@@ -3,7 +3,6 @@ import { TaskModel } from '../task.model';
 import { RouterLink } from '@angular/router';
 import { TaskCard } from '../task-card/task-card';
 import { TaskStore } from '../../services/task-store.service';
-//import { TaskApi } from '../task-api.service';
 
 @Component({
   imports: [RouterLink, TaskCard],
@@ -12,21 +11,22 @@ import { TaskStore } from '../../services/task-store.service';
   templateUrl: './task-list.html',
 })
 export class TaskList {
-
   private readonly store = inject(TaskStore);
 
   filter = signal('');
 
   tasks = computed(() => {
-    const q = this.filter().toLowerCase();
-    return this.store.tasks().filter(t => t.title.toLowerCase().includes(q))
-  })
+    const query = this.filter().toLowerCase();
+    return this.store.tasks().filter(task =>
+      task.title.toLowerCase().includes(query)
+    );
+  });
 
-  /*markDone(task: TaskModel) {
-    this.store.update(task.id, {status:'done'});
+  markDone(task: TaskModel): void {
+    void this.store.update(task.id, { status: 'done' });
   }
 
-  remove(id: number) {
-    this.store.remove(id);
-  }*/
+  remove(id: string): void {
+    void this.store.remove(id);
+  }
 }
